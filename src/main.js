@@ -1,28 +1,24 @@
-/* global __dirname,process,require */
-
-const Electron      = require('electron'),
-      Application   = Electron.app,
-      BrowserWindow = Electron.BrowserWindow;
+const { app, BrowserWindow } = require('electron');
 
 let window = null;
 
 if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')();
+  require('electron-debug')(); // eslint-disable-line global-require
 }
 
-Application.on('window-all-closed', () => {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    Application.quit();
+    app.quit();
   }
 });
 
-Application.on('ready', () => {
+app.on('ready', () => {
   window = new BrowserWindow({
-    'show'       : process.env.NODE_ENV === 'development',
-    'width'      : 896,
-    'height'     : 512,
-    'resizable'  : false,
-    'fullscreen' : false
+    show: process.env.NODE_ENV === 'development',
+    width: 896,
+    height: 512,
+    resizable: false,
+    fullscreen: false
   });
 
   if (process.env.NODE_ENV !== 'development') {
