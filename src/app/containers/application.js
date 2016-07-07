@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class ApplicationContainer extends React.Component {
   render() {
@@ -11,7 +11,7 @@ class ApplicationContainer extends React.Component {
 }
 
 ApplicationContainer.propTypes = {
-  children : React.PropTypes.element.isRequired
+  children: React.PropTypes.element.isRequired
 };
 
 export default ApplicationContainer;
