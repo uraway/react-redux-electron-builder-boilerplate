@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 import File from 'fs-extra';
-import packageJSON from '../package';
+import packageJSON from '../package.json';
 
-const KEYS = ['author', 'dependencies', 'description', 'main', 'name', 'version'],
-  DATA = KEYS.reduce((object, key) => {
-    return Object.assign(object, { [key]: packageJSON[key] });
-  }, {});
+const KEYS = ['author', 'dependencies', 'description', 'main', 'name', 'version'];
+const DATA = KEYS.reduce((object, key) => {
+  return Object.assign(object, { [key]: packageJSON[key] });
+}, {});
 
 try {
   File.mkdirSync('./app');
@@ -16,6 +16,6 @@ try {
   }
 }
 
-File.copySync('./src/images', './acpp/images');
+File.copySync('./src/images', './app/images');
 File.writeFileSync('./app/index.html', File.readFileSync('./src/index.html'));
 File.writeFileSync('./app/package.json', JSON.stringify(DATA));

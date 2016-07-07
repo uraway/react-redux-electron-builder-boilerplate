@@ -2,3 +2,4 @@ node_modules/
 release/
 /app/
 *.log
+src/config/version.js
