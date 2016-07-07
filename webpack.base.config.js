@@ -1,22 +1,22 @@
 import path from 'path';
 
 export default {
-  module : {
-    loaders : [
+  module: {
+    loaders: [
       {
-        test    : /\.jsx?$/,
-        loaders : ['babel'],
-        exclude : /node_modules/
+        test: /\.jsx?$/,
+        loaders: ['babel'],
+        exclude: /node_modules/
       }
     ]
   },
-  output : {
-    path          : path.resolve('./app'),
-    filename      : 'bundle.js',
-    libraryTarget : 'commonjs2'
+  output: {
+    path: path.resolve('./app'),
+    filename: 'bundle.js',
+    libraryTarget: 'commonjs2'
   },
-  resolve : {
-    extensions         : ['', '.js', '.jsx'],
-    modulesDirectories : ['node_modules', 'src']
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories: ['node_modules', 'src']
   }
 };

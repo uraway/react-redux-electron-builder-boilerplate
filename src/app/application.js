@@ -5,8 +5,8 @@ import configureStore from './store';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-const store   = configureStore(),
-      history = syncHistoryWithStore(hashHistory, store);
+const store = configureStore();
+const history = syncHistoryWithStore(hashHistory, store);
 
 class Application extends React.Component {
   render() {

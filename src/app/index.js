@@ -1,12 +1,10 @@
-/* global module,process,require */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 let Container;
 
 if (process.env.NODE_ENV === 'development') {
-  Container = require('react-hot-loader').AppContainer;
+  Container = require('react-hot-loader').AppContainer; // eslint-disable-line global-require
 } else {
   Container = (props) => {
     return React.Children.only(props.children);
@@ -14,7 +12,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const render = () => {
-  const Application = require('./application').default;
+  const Application = require('./application').default; // eslint-disable-line global-require
 
   ReactDOM.render(
     <Container>

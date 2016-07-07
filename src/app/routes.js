@@ -4,7 +4,7 @@ import HomepageContainer from './containers/homepage';
 import ApplicationContainer from './containers/application';
 
 export default (
-  <Route path='/' component={ApplicationContainer}>
+  <Route path="/" component={ApplicationContainer}>
     <IndexRoute component={HomepageContainer} />
   </Route>
 );

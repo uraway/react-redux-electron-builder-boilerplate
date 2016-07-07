@@ -7,32 +7,32 @@ import BaseConfiguration from './webpack.base.config';
 export default {
   ...BaseConfiguration,
 
-  devtool : 'hidden',
-  entry   : Path.resolve(`${__dirname}/src/main`),
-  target  : 'electron-main',
+  devtool: 'hidden',
+  entry: Path.resolve(`${__dirname}/src/main`),
+  target: 'electron-main',
 
-  output : {
+  output: {
     ...BaseConfiguration.output,
 
-    path     : __dirname,
-    filename : './app/main.js'
+    path: __dirname,
+    filename: './app/main.js'
   },
 
-  plugins : [
+  plugins: [
     new Webpack.optimize.UglifyJsPlugin({
-      compressor : {
-        warnings : false
+      compressor: {
+        warnings: false
       }
     }),
     new Webpack.DefinePlugin({
-      'process.env' : {
-        NODE_ENV : JSON.stringify('production')
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
       }
     })
   ],
 
-  node : {
-    __dirname  : false,
-    __filename : false
+  node: {
+    __dirname: false,
+    __filename: false
   }
 };
