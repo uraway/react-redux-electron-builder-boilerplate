@@ -11,6 +11,7 @@
     "build-all": "npm run build && npm run prepare",
     "lint": "eslint src test *.js",
     "package": "npm run prepare && npm run build && build --osx",
+    "version": "node -r babel-register ./scripts/version.js",
     "prepare": "node -r babel-register scripts/prepare",
     "start": "concurrently --kill-others \"npm run start-server\" \"npm run start-hot\"",
     "start-server": "node -r babel-register server.js",
