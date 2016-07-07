@@ -14,6 +14,6 @@ try {
   }
 }
 
-fs.copySync('./src/images', './app/images');
+fs.copySync('./src/assets', './app/assets');
 fs.writeFileSync('./app/index.html', fs.readFileSync('./src/index.html'));
 fs.writeFileSync('./app/package.json', JSON.stringify(DATA));
