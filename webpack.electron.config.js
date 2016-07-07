@@ -1,21 +1,21 @@
 /* global __dirname */
 
-import Path from "path";
-import Webpack from "webpack";
-import BaseConfiguration from "./webpack.base.config";
+import Path from 'path';
+import Webpack from 'webpack';
+import BaseConfiguration from './webpack.base.config';
 
 export default {
   ...BaseConfiguration,
 
-  devtool : "hidden",
+  devtool : 'hidden',
   entry   : Path.resolve(`${__dirname}/src/main`),
-  target  : "electron-main",
+  target  : 'electron-main',
 
   output : {
     ...BaseConfiguration.output,
 
     path     : __dirname,
-    filename : "./app/main.js"
+    filename : './app/main.js'
   },
 
   plugins : [
@@ -25,8 +25,8 @@ export default {
       }
     }),
     new Webpack.DefinePlugin({
-      "process.env" : {
-        NODE_ENV : JSON.stringify("production")
+      'process.env' : {
+        NODE_ENV : JSON.stringify('production')
       }
     })
   ],
