@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+
+  <title>Electron Base</title>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script>
+(() => {
+  const element = document.createElement("script");
+
+  element.src = process.env.HOT ? "http://localhost:3000/build/bundle.js" : "bundle.js";
+
+  document.write(element.outerHTML);
+})();
+</script>
+
+</body>
+</html>

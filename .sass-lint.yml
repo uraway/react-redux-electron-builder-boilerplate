@@ -1,0 +1,80 @@
+files:
+  include: "application/stylesheets/**/*.scss"
+
+options:
+  formatter: stylish
+  merge-default-rules: false
+
+rules:
+  hex-length:
+    - 1
+    - style: short
+
+  hex-notation:
+    - 1
+    - style: uppercase
+
+  leading-zero:
+    - 1
+    - include: true
+
+  nesting-depth:
+    - 1
+    - max-depth: 4
+
+  no-color-literals: 0
+
+  no-ids: 0
+
+  no-mergeable-selectors: 0
+
+  placeholder-in-extend: 0
+
+  property-sort-order:
+    - 1
+    - order:
+        - position
+        - top
+        - right
+        - bottom
+        - left
+        - background
+        - background-size
+        - color
+        - width
+        - height
+        - margin
+        - margin-top
+        - margin-right
+        - margin-bottom
+        - margin-left
+        - padding
+        - padding-top
+        - padding-right
+        - padding-bottom
+        - padding-left
+        - border
+        - border-color
+        - border-top
+        - border-right
+        - border-bottom
+        - border-left
+        - border-radius
+        - font
+        - font-size
+        - font-weight
+        - font-style
+        - line-height
+        - letter-spacing
+        - text-align
+        - text-decoration
+        - text-transform
+        - display
+        - float
+        - opacity
+
+  quotes:
+    - 1
+    - style: double
+
+  single-line-per-selector: 1
