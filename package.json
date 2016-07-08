@@ -1,7 +1,7 @@
 {
   "main": "main.js",
   "name": "react-redux-electron-builder-boilerplate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Electron application",
   "license": "MIT",
   "author": {
@@ -33,8 +33,8 @@
     "lint": "eslint src test *.js",
     "version": "node -r babel-register ./scripts/version.js",
     "prepare": "node -r babel-register ./scripts/prepare.js",
-    "package": "npm run build --all && build",
-    "release": "npm run build --all && build --publish=onTag -mw --x64",
+    "package": "npm run build-all && build",
+    "release": "npm run build-all && build --publish=always --draft -mw --x64",
     "start": "cross-env NODE_ENV=production electron ./app",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "hot-server": "node -r babel-register server.js",
