@@ -1,26 +1,48 @@
 {
   "main": "main.js",
   "name": "react-redux-electron-builder-boilerplate",
-  "author": "Masato Urai",
   "version": "0.0.1",
   "description": "Electron application",
+  "license": "MIT",
+  "author": {
+    "name": "Masato Urai",
+    "email": "masato.u0107@gmail.com",
+    "url": "https://github.com/uraway"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uraway/react-redux-electron-builder-boilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uraway/react-redux-electron-builder-boilerplate/issues"
+  },
+  "homepage": "https://github.com/uraway/react-redux-electron-builder-boilerplate#readme",
+  "keywords": [
+    "electron",
+    "github release",
+    "react",
+    "reacr-router",
+    "redux"
+  ],
   "scripts": {
     "build": "npm run build-main && npm run build-renderer",
     "build-main": "cross-env NODE_ENV=production npm run webpack -- --config ./webpack.electron.config",
     "build-renderer": "cross-env NODE_ENV=production npm run webpack -- --config ./webpack.production.config",
     "build-all": "npm run build && npm run prepare",
     "lint": "eslint src test *.js",
-    "package": "npm run prepare && npm run build && build --osx",
     "version": "node -r babel-register ./scripts/version.js",
     "prepare": "node -r babel-register ./scripts/prepare.js",
-    "start": "concurrently --kill-others \"npm run start-server\" \"npm run start-hot\"",
-    "start-server": "node -r babel-register server.js",
+    "package": "npm run build --all && build",
+    "release": "npm run build --all && build --publish=onTag -mlw --x64",
+    "start": "cross-env NODE_ENV=production electron ./app",
+    "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
+    "hot-server": "node -r babel-register server.js",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register ./src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test-watch": "npm test -- --watch",
-    "webpack": "node -r babel-register ./node_modules/webpack/bin/webpack --progress --profile --colors"
+    "test-watch": "npm test -- --watch"
   },
   "dependencies": {
+    "electron-gh-releases": "^2.0.4",
     "react": "15.2.0",
     "react-dom": "15.2.0",
     "react-redux": "4.4.5",
