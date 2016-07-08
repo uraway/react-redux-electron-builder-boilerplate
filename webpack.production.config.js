@@ -1,19 +1,19 @@
 import Webpack from 'webpack';
-import BaseConfiguration from './webpack.base.config';
+import baseConfig from './webpack.base.config';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 export default {
-  ...BaseConfiguration,
+  ...baseConfig,
 
   devtool: 'hidden',
   entry: './src/app/index',
   target: 'electron-renderer',
 
   module: {
-    ...BaseConfiguration.module,
+    ...baseConfig.module,
 
     loaders: [
-      ...BaseConfiguration.module.loaders,
+      ...baseConfig.module.loaders,
 
       {
         test: /\.global\.css$/,
@@ -34,9 +34,9 @@ export default {
   },
 
   output: {
-    ...BaseConfiguration.output,
+    ...baseConfig.output,
 
-    publicPath: '../release/'
+    publicPath: '../app/'
   },
 
   plugins: [
