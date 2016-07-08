@@ -1,6 +1,4 @@
-/* global __dirname */
-
-import Path from 'path';
+import path from 'path';
 import Webpack from 'webpack';
 import baseConfig from './webpack.base.config';
 
@@ -8,7 +6,7 @@ export default {
   ...baseConfig,
 
   devtool: 'hidden',
-  entry: Path.resolve(`${__dirname}/src/main`),
+  entry: path.resolve(`${__dirname}/src/main`),
   target: 'electron-main',
 
   output: {

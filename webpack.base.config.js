@@ -7,16 +7,20 @@ export default {
         test: /\.jsx?$/,
         loaders: ['babel'],
         exclude: /node_modules/
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   },
   output: {
-    path: path.resolve('./app'),
+    path: path.join(__dirname, 'app'),
     filename: 'bundle.js',
     libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    modulesDirectories: ['node_modules', 'src']
+    extensions: ['', '.js', '.jsx', 'json'],
+    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   }
 };

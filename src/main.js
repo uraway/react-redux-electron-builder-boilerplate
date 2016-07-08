@@ -1,4 +1,6 @@
-const { app, BrowserWindow } = require('electron');
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
+import GhRelease from 'electron-gh-releases';
+import version from './config/version';
 
 let mainWindow = null;
 
@@ -22,6 +24,60 @@ app.on('ready', () => {
     height: 512,
   });
 
+  function confirmAutoUpdate(updater) {
+    dialog.showMessageBox({
+      type: 'question',
+      buttons: ['Update & Restart', 'Cancel'],
+      title: 'Update Available',
+      cancelId: 99,
+      message: 'There is an update available. Would you like to update now?'
+    }, (response) => {
+      app.dock.hide();
+      if (response === 0) {
+        updater.install();
+      }
+    });
+  }
+
+  function checkAutoUpdate(showAlert) {
+    const autoUpdateOptions = {
+      repo: 'uraway/react-redux-electron-builder-boilerplate',
+      currentVersion: version
+    };
+
+    const updater = new GhRelease(autoUpdateOptions);
+
+    updater.on('error', (event, message) => {
+      dialog.showErrorBox({
+        title: 'ERROR',
+        content: `Event: ${JSON.stringify(event)}. Message: ${message}`
+      });
+    });
+
+    updater.on('update-downloaded', () => {
+      confirmAutoUpdate(updater);
+    });
+
+    updater.check((err, status) => {
+      if (err || !status) {
+        if (showAlert) {
+          dialog.showMessageBox({
+            type: 'info',
+            buttons: ['Close'],
+            title: 'No update available',
+            message: 'You are currently running the latest version.'
+          });
+        }
+      }
+
+      if (!err && status) {
+        updater.download();
+      }
+    });
+  }
+
+  checkAutoUpdate(false);
+
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
     mainWindow.focus();
@@ -37,4 +93,8 @@ app.on('ready', () => {
   } else {
     mainWindow.loadURL(`file://${__dirname}/index.html`);
   }
+
+  ipcMain.on('check-update', () => {
+    checkAutoUpdate(true);
+  });
 });
