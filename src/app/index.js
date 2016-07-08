@@ -1,29 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router, hashHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import routes from './routes';
+import configureStore from './store/configureStore';
 
-let Container;
+const store = configureStore();
+const history = syncHistoryWithStore(hashHistory, store);
 
-if (process.env.NODE_ENV === 'development') {
-  Container = require('react-hot-loader').AppContainer; // eslint-disable-line global-require
-} else {
-  Container = (props) => {
-    return React.Children.only(props.children);
-  };
-}
-
-const render = () => {
-  const Application = require('./application').default; // eslint-disable-line global-require
-
-  ReactDOM.render(
-    <Container>
-      <Application />
-    </Container>,
-    document.getElementById('root')
-  );
-};
-
-if (module.hot) {
-  module.hot.accept('./application', render);
-}
-
-render();
+render(
+  <Provider store={store}>
+    <Router history={history} routes={routes} />
+  </Provider>,
+  document.getElementById('root')
+);

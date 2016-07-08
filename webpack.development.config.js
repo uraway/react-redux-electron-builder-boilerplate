@@ -21,11 +21,18 @@ export default {
       ...BaseConfiguration.module.loaders,
 
       {
-        test: /\.scss$/,
+        test: /\.global\.css$/,
         loaders: [
-          'style',
-          'css?camelCase&modules&sourceMap',
-          'sass?sourceMap'
+          'style-loader',
+          'css-loader?sourceMap'
+        ]
+      },
+      {
+        test: /^((?!\.global).)*\.css$/,
+        loaders: [
+          'style-loader',
+          `css-loader?modules&sourceMap&
+          importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]`
         ]
       }
     ]

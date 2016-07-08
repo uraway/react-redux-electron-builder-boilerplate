@@ -16,8 +16,19 @@ export default {
       ...BaseConfiguration.module.loaders,
 
       {
-        test: /\.scss$/,
-        loaders: ['style', 'css?camelCase&modules', 'sass']
+        test: /\.global\.css$/,
+        loader: ExtractTextPlugin.extract(
+          'style-loader',
+          'css-loader'
+        )
+      },
+      {
+        test: /^((?!\.global).)*\.css$/,
+        loaders: [
+          'style-loader',
+          `css-loader?modules&sourceMap&
+          importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]`
+        ]
       }
     ]
   },
