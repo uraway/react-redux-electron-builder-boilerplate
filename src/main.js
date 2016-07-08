@@ -1,5 +1,6 @@
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import GhRelease from 'electron-gh-releases';
+import version from './config/version';
 
 let mainWindow = null;
 
@@ -41,7 +42,7 @@ app.on('ready', () => {
   function checkAutoUpdate(showAlert) {
     const autoUpdateOptions = {
       repo: 'uraway/react-redux-electron-builder-boilerplate',
-      currentVersion: app.getVersion()
+      currentVersion: version
     };
 
     const updater = new GhRelease(autoUpdateOptions);
