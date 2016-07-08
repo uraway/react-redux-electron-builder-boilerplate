@@ -1,24 +1,23 @@
 import Webpack from 'webpack';
-import BaseConfiguration from './webpack.base.config';
+import baseConfig from './webpack.base.config';
 
 export default {
-  ...BaseConfiguration,
+  ...baseConfig,
 
   debug: true,
   devtool: 'source-map',
   target: 'electron-renderer',
 
   entry: [
-    'react-hot-loader/patch',
     'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
     './src/app/index'
   ],
 
   module: {
-    ...BaseConfiguration.module,
+    ...baseConfig.module,
 
     loaders: [
-      ...BaseConfiguration.module.loaders,
+      ...baseConfig.module.loaders,
 
       {
         test: /\.global\.css$/,
@@ -39,7 +38,7 @@ export default {
   },
 
   output: {
-    ...BaseConfiguration.output,
+    ...baseConfig.output,
 
     publicPath: 'http://localhost:3000/build/'
   },

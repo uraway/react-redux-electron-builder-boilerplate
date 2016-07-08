@@ -2,17 +2,17 @@
 
 import Path from 'path';
 import Webpack from 'webpack';
-import BaseConfiguration from './webpack.base.config';
+import baseConfig from './webpack.base.config';
 
 export default {
-  ...BaseConfiguration,
+  ...baseConfig,
 
   devtool: 'hidden',
   entry: Path.resolve(`${__dirname}/src/main`),
   target: 'electron-main',
 
   output: {
-    ...BaseConfiguration.output,
+    ...baseConfig.output,
 
     path: __dirname,
     filename: './app/main.js'

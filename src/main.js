@@ -1,8 +1,11 @@
 const { app, BrowserWindow } = require('electron');
 
-let window = null;
+let mainWindow = null;
 
-if (process.env.NODE_ENV === 'development') {
+// utils
+const isDevelopment = (process.env.NODE_ENV === 'development');
+
+if (isDevelopment) {
   require('electron-debug')(); // eslint-disable-line global-require
 }
 
@@ -13,28 +16,25 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-  window = new BrowserWindow({
-    show: process.env.NODE_ENV === 'development',
+  mainWindow = new BrowserWindow({
+    show: false,
     width: 896,
     height: 512,
-    resizable: false,
-    fullscreen: false
   });
 
-  if (process.env.NODE_ENV !== 'development') {
-    window.webContents.on('did-finish-load', () => {
-      window.show();
-      window.focus();
-    });
-  }
-
-  window.on('closed', () => {
-    window = null;
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.show();
+    mainWindow.focus();
   });
 
-  if (process.env.NODE_ENV === 'development') {
-    window.loadURL(`file://${__dirname}/../src/index.html`);
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+
+  if (isDevelopment) {
+    mainWindow.loadURL(`file://${__dirname}/../src/index.html`);
+    mainWindow.openDevTools();
   } else {
-    window.loadURL(`file://${__dirname}/index.html`);
+    mainWindow.loadURL(`file://${__dirname}/index.html`);
   }
 });
