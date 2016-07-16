@@ -34,7 +34,7 @@
     "build-all": "npm run prepare && npm run version && npm run build",
     "lint": "eslint src test *.js",
     "package": "npm run build-all && build -m --x64",
-    "release": "npm run package && npm run codesign && node -r babel-register ./scripts/release.js",
+    "release": "npm run package && node -r babel-register ./scripts/release.js",
     "start": "cross-env NODE_ENV=production electron ./app",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "hot-server": "node -r babel-register server.js",
