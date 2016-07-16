@@ -1,7 +1,7 @@
 {
   "main": "main.js",
   "name": "react-redux-electron-builder-boilerplate",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Electron application",
   "license": "MIT",
   "author": {
@@ -29,12 +29,12 @@
     "webpack": "node -r babel-register ./node_modules/webpack/bin/webpack --progress --profile --colors",
     "build-main": "cross-env NODE_ENV=production npm run webpack -- --config ./webpack.electron.config",
     "build-renderer": "cross-env NODE_ENV=production npm run webpack -- --config ./webpack.production.config",
-    "build-all": "npm run build && npm run prepare",
-    "lint": "eslint src test *.js",
     "version": "node -r babel-register ./scripts/version.js",
     "prepare": "node -r babel-register ./scripts/prepare.js",
-    "package": "npm run build-all && build",
-    "release": "npm run build-all && build --publish=always --draft -mw --x64",
+    "build-all": "npm run prepare && npm run version && npm run build",
+    "lint": "eslint src test *.js",
+    "package": "npm run build-all && build -m --x64",
+    "release": "npm run package && node -r babel-register ./scripts/release.js",
     "start": "cross-env NODE_ENV=production electron ./app",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "hot-server": "node -r babel-register server.js",
@@ -43,7 +43,6 @@
     "test-watch": "npm test -- --watch"
   },
   "dependencies": {
-    "electron-gh-releases": "^2.0.4",
     "react": "15.2.0",
     "react-dom": "15.2.0",
     "react-redux": "4.4.5",
@@ -71,6 +70,7 @@
     "electron-debug": "1.0.1",
     "electron-mocha": "2.2.1",
     "electron-prebuilt": "1.2.6",
+    "electron-gh-releases": "^2.0.4",
     "enzyme": "2.3.0",
     "eslint": "^2.10.2",
     "eslint-config-airbnb": "^9.0.1",
@@ -94,8 +94,5 @@
   },
   "build": {
     "appId": "com.yourname.electron"
-  },
-  "directories": {
-    "output": "release"
   }
 }

@@ -1,4 +1,4 @@
-import Webpack from 'webpack';
+import webpack from 'webpack';
 import baseConfig from './webpack.base.config';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
@@ -40,14 +40,14 @@ export default {
   },
 
   plugins: [
-    new Webpack.optimize.OccurenceOrderPlugin(),
-    new Webpack.DefinePlugin({
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
       __DEV__: false,
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
     }),
-    new Webpack.optimize.UglifyJsPlugin({
+    new webpack.optimize.UglifyJsPlugin({
       compressor: {
         screw_ie8: true,
         warnings: false

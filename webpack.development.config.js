@@ -1,4 +1,4 @@
-import Webpack from 'webpack';
+import webpack from 'webpack';
 import baseConfig from './webpack.base.config';
 
 export default {
@@ -44,9 +44,9 @@ export default {
   },
 
   plugins: [
-    new Webpack.HotModuleReplacementPlugin(),
-    new Webpack.NoErrorsPlugin(),
-    new Webpack.DefinePlugin({
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
       __DEV__: true,
       'process.env': {
         NODE_ENV: JSON.stringify('development')
