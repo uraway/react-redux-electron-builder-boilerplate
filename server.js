@@ -1,31 +1,31 @@
 /* global process */
 
-import Express from 'express';
-import Webpack from 'webpack';
+import express from 'express';
+import webpack from 'webpack';
 import configuration from './webpack.development.config';
 import hotMiddleware from 'webpack-hot-middleware';
 import developmentMiddleware from 'webpack-dev-middleware';
 
-const app = Express();
-const Compiler = Webpack(configuration);
-const Port = 3000;
-const WDM = developmentMiddleware(Compiler, {
+const app = express();
+const compiler = webpack(configuration);
+const port = 3000;
+const middleware = developmentMiddleware(compiler, {
   publicPath: configuration.output.publicPath,
   stats: { colors: true }
 });
 
-app.use(WDM);
-app.use(hotMiddleware(Compiler));
+app.use(middleware);
+app.use(hotMiddleware(compiler));
 
-const Server = app.listen(Port, 'localhost', (error) => {
+const server = app.listen(port, 'localhost', (error) => {
   if (error) {
     throw error;
   }
 });
 
 process.on('SIGTERM', () => {
-  WDM.close();
-  Server.close(() => {
+  middleware.close();
+  server.close(() => {
     process.exit(0);
   });
 });

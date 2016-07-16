@@ -1,5 +1,5 @@
 import path from 'path';
-import Webpack from 'webpack';
+import webpack from 'webpack';
 import baseConfig from './webpack.base.config';
 
 export default {
@@ -17,12 +17,12 @@ export default {
   },
 
   plugins: [
-    new Webpack.optimize.UglifyJsPlugin({
+    new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
       }
     }),
-    new Webpack.DefinePlugin({
+    new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
